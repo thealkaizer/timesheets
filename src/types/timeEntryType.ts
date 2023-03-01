@@ -1,11 +1,11 @@
-import TimeEntry from "$root/components/TimeEntry.svelte";
+import type TimeEntry from "$root/components/TimeEntry.svelte";
 
 export class TimeEntryType {
     localId: string;
-    component: TimeEntry;
+    firestoreId: string;
 
-    constructor(id: string, component: TimeEntry) {
+    constructor(id?: string, firestoreId?: string) {
         this.localId = id;
-        this.component = component;
+        this.firestoreId = firestoreId;
     }
 }

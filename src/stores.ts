@@ -1,3 +1,3 @@
-import { writable, readable, derived } from "svelte/store";
+import { writable } from "svelte/store";
 
 export const projectsStore = writable([]);

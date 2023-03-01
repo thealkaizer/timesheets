@@ -5,13 +5,15 @@
     type removeEntryType = (id: string) => void;
     export let removeEntry: removeEntryType;
 
-    export let localId;
+    export let localId: string;
+    let hours: number = 0;
+    let isRND: boolean = false;
 
     let categoryDisabled = true;
     let typeDisabled = true;
-    let selectedProject;
-    let selectedCategory;
-    let selectedType;
+    let selectedProject: string;
+    let selectedCategory: string;
+    let selectedType: string;
 
     $: categoryDisabled = selectedProject === "";
     $: typeDisabled = selectedCategory === "";
@@ -35,7 +37,10 @@
     <select bind:value={selectedType} name="" id="" disabled="{typeDisabled}">
         <option value="" selected disabled hidden>Work Details</option>
     </select>
-    <button>X</button>
+    <button on:click={handleRemoval}>X</button>
+    <input bind:checked={isRND} type="checkbox">
+    <input type="number" bind:value={hours} min=0 max={35}>
+    <input type="range" bind:value={hours} min=0 max={35}>
 </main>
 
 <style>
