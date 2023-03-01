@@ -33,8 +33,15 @@
 
 <style>
     main {
-        background-color: aquamarine;
+        background-color: white;
+        border: 5px solid black;
+        border-radius: 3rem;
+        padding: 1rem;
         width: 60rem;
-        height: 10rem;
+        height: fit-content;
+    }
+    
+    h1 {
+        margin: 0;
     }
 </style>

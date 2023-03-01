@@ -45,6 +45,8 @@
 
 <style>
     main {
-        background-color: aqua;
+        background-color: gray;
+        margin: 0.5rem 3rem;
+        padding: 0.5rem;
     }
 </style>
