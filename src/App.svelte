@@ -1,34 +1,34 @@
 <script lang="ts">
-    //firebase
-    import { firebaseApp, firestoreDb } from "$root/firebaseConfig";
-    import { getDocs, collection } from "firebase/firestore";
-    import type { ProjectType } from "./types/projectType";
+	//firebase
+	import { getDocs, collection } from 'firebase/firestore'
+	import { firestoreDb } from '$root/firebaseConfig'
 
+	//stores
+	import { projects } from '$root/stores/projects'
+	
+	//svelte
+	import Debug from '$root/components/Debug.svelte'
+	import Week from '$root/components/Week.svelte'
 
-    //stores
-    import { projectsStore } from "$root/stores";
+	fetchProjects()
 
-    //svelte
-    import Week from "$root/components/Week.svelte";
+	async function fetchProjects() {
+		console.log('Fetching projects')
+		try {
+			const { docs } = await getDocs(collection(firestoreDb, 'projects'))
+			
+			$projects = docs.map((p) => ({ name: p.data().name }))
+		} catch (e) {
+			console.error('Error ' + e)
+		}
+	}
 
-    fetchProjects();
-
-    async function fetchProjects() {
-        try {
-            console.log("Fetching projects");
-            const snapshot = await getDocs(collection(firestoreDb, "projects"));
-            let projectsArray = [];
-            snapshot.forEach((project) => {
-            const projectObject: ProjectType = {
-                name: project.data().name
-             }
-            projectsArray = [...projectsArray, projectObject];
-            projectsStore.set(projectsArray);
-        })
-        } catch(e) {
-            console.log("Error " + e);
-        }
-    }
+	// Change to true to show debug info
+	let debug = false
 </script>
 
-<Week/>
+<Week />
+
+{#if debug}
+	<Debug />
+{/if}

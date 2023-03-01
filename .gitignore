@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Private Firebase Config with sensitive API Key
+./src/firebaseConfig.ts

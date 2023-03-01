@@ -1,47 +1,34 @@
 <script lang="ts">
-    import TimeEntry from "$root/components/TimeEntry.svelte";
-    import type { TimeEntryType } from "$root/types/timeEntryType";
-    import { v4 as uuidv4 } from 'uuid';
-
-    let timeEntries: TimeEntryType[] = [];
-
-    function addEntry():void {
-        const newId = uuidv4();
-        let newEntry: TimeEntryType = {
-            localId: newId,
-            firestoreId: ""
-        }
-        timeEntries = [...timeEntries, newEntry];
-    }
-
-    function removeEntry(id: string):void {
-        timeEntries = timeEntries.filter(entry => entry.localId !== id);
-    }
-
+	import { timeEntries } from '$root/stores/timeEntries'
+	import Entry from '$root/components/Entry.svelte'
 </script>
 
 <main>
-    <h1>Semaine du 6 mars au 10 mars</h1>
-    <button>...</button>
-    <button on:click={addEntry}>Add entry</button>
-    {#each timeEntries as entry (entry.localId)}
-        <TimeEntry localId={entry.localId} {removeEntry} />
-    {/each}
-    <hr>
-    
+	<h1>Semaine du 6 mars au 10 mars</h1>
+
+	<button>...</button>
+
+	<button on:click={timeEntries.add}> Add entry </button>
+
+	{#each $timeEntries as entry, i (entry.localId)}
+		<Entry bind:entry={$timeEntries[i]} />
+	{/each}
+
+	<hr />
 </main>
 
 <style>
-    main {
-        background-color: white;
-        border: 5px solid black;
-        border-radius: 3rem;
-        padding: 1rem;
-        width: 60rem;
-        height: fit-content;
-    }
-    
-    h1 {
-        margin: 0;
-    }
+	main {
+		width: 60rem;
+		height: fit-content;
+		padding: 1rem;
+
+		background-color: white;
+		border: .3rem solid black;
+		border-radius: 1rem;
+	}
+
+	h1 {
+		margin: 0;
+	}
 </style>
